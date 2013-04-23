@@ -18,11 +18,11 @@ endif
 C_SRC = $(wildcard *.c)
 C_TARGET = $(patsubst %.c, %, ${C_SRC})
 C_DUMP= $(patsubst %.c, %.dump, ${C_SRC})
-CPP_SRC = $(wildcard *.cpp)
-CPP_TARGET = $(patsubst %.cpp, %, ${CPP_SRC})
-CPP_DUMP= $(patsubst %.cpp, %.dump, ${CPP_SRC})
-TARGET = ${C_TARGET} ${CPP_TARGET}
-DUMP = ${C_DUMP} ${CPP_DUMP}
+CXX_SRC = $(wildcard *.cpp)
+CXX_TARGET = $(patsubst %.cpp, %, ${CXX_SRC})
+CXX_DUMP= $(patsubst %.cpp, %.dump, ${CXX_SRC})
+TARGET = ${C_TARGET} ${CXX_TARGET}
+DUMP = ${C_DUMP} ${CXX_DUMP}
 
 all: ${TARGET}
 
@@ -34,7 +34,7 @@ clean:
 ${C_TARGET}: %: %.c
 	${CC} -o $@ $< ${CFLAGS} ${LDFLAGS} ${LIBS}
 
-${CPP_TARGET}: %: %.cpp
+${CXX_TARGET}: %: %.cpp
 	${CXX} -o $@ $< ${CXXFLAGS} ${LDFLAGS} ${LIBS}
 
 ${DUMP}: %.dump: %
